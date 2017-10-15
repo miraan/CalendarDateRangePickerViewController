@@ -1,0 +1,6 @@
+framework module CalendarDateRangePickerViewController {
+  umbrella header "CalendarDateRangePickerViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

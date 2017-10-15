@@ -1,0 +1,22 @@
+{
+  "name": "CalendarDateRangePickerViewController",
+  "version": "0.1.0",
+  "summary": "A short description of CalendarDateRangePickerViewController.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/miraan/CalendarDateRangePickerViewController",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "miraan": "miraan@triprapp.com"
+  },
+  "source": {
+    "git": "https://github.com/miraan/CalendarDateRangePickerViewController.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "CalendarDateRangePickerViewController/Classes/**/*"
+}

@@ -1,0 +1,6 @@
+framework module Pods_CalendarDateRangePickerViewController_Example {
+  umbrella header "Pods-CalendarDateRangePickerViewController_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

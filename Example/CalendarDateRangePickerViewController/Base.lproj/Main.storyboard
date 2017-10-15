@@ -1,25 +1,77 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ntg-n2-LsF">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Navigation Controller-->
+        <scene sceneID="uJg-BB-bgm">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <navigationController id="Ntg-n2-LsF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LEO-FM-Cri">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Pkg-6j-FeT" kind="relationship" relationship="rootViewController" id="rQ6-3v-hNB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Yo-Rr-t0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-428" y="27"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="sYx-l2-qnm">
+            <objects>
+                <viewController id="Pkg-6j-FeT" customClass="ViewController" customModule="CalendarDateRangePickerViewController_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gTF-As-GNw"/>
+                        <viewControllerLayoutGuide type="bottom" id="hts-3c-PdN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ii6-EO-KDQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Date Range Selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-g5-Se9">
+                                <rect key="frame" x="16" y="98" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMc-dB-akE">
+                                <rect key="frame" x="87" y="146" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bwo-ra-spM"/>
+                                    <constraint firstAttribute="width" constant="200" id="eLw-Y6-mjC"/>
+                                </constraints>
+                                <state key="normal" title="Select Date Range"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="Pkg-6j-FeT" eventType="touchUpInside" id="piK-su-woZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cMc-dB-akE" firstAttribute="top" secondItem="Gfn-g5-Se9" secondAttribute="bottom" constant="27.5" id="Aev-oI-fnj"/>
+                            <constraint firstItem="Gfn-g5-Se9" firstAttribute="leading" secondItem="ii6-EO-KDQ" secondAttribute="leading" constant="16" id="SLt-gD-ju7"/>
+                            <constraint firstAttribute="trailing" secondItem="Gfn-g5-Se9" secondAttribute="trailing" constant="16" id="YFS-TN-dXj"/>
+                            <constraint firstItem="cMc-dB-akE" firstAttribute="centerX" secondItem="ii6-EO-KDQ" secondAttribute="centerX" id="Ywl-ov-KAv"/>
+                            <constraint firstItem="Gfn-g5-Se9" firstAttribute="top" secondItem="gTF-As-GNw" secondAttribute="bottom" constant="34" id="hAB-7s-xYe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jrs-WK-vAT"/>
+                    <connections>
+                        <outlet property="label" destination="Gfn-g5-Se9" id="cOO-Ws-3DD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dij-sB-5J1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="280.80000000000001" y="26.53673163418291"/>
         </scene>
     </scenes>
 </document>

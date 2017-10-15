@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		533E870F1F94020A00CA59CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E870E1F94020A00CA59CA /* ViewController.swift */; };
+		53A0E5681F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0E5671F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift */; };
+		53A0E56C1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0E56B1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift */; };
+		53B5F1A71F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5F1A61F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -28,11 +31,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1C3A473AEA8A9FDE924642CC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		1C3A473AEA8A9FDE924642CC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		533E870E1F94020A00CA59CA /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		53A0E5671F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerHeaderView.swift; sourceTree = "<group>"; };
+		53A0E56B1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerCell.swift; sourceTree = "<group>"; };
+		53B5F1A61F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerViewController.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CalendarDateRangePickerViewController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarDateRangePickerViewController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -41,12 +47,12 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		863F34A79DF14110025EE9E4 /* Pods-CalendarDateRangePickerViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDateRangePickerViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDateRangePickerViewController_Example/Pods-CalendarDateRangePickerViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8F4F7B8891DE806FE849178A /* Pods_CalendarDateRangePickerViewController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarDateRangePickerViewController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A35120B1111B0AC9940800A2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		A35120B1111B0AC9940800A2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C5211826DC9557421575D69D /* Pods-CalendarDateRangePickerViewController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDateRangePickerViewController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDateRangePickerViewController_Tests/Pods-CalendarDateRangePickerViewController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C9304EBA1ACFB048B6759598 /* Pods-CalendarDateRangePickerViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDateRangePickerViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDateRangePickerViewController_Example/Pods-CalendarDateRangePickerViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		D669374E1E3D0FC948166522 /* Pods_CalendarDateRangePickerViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CalendarDateRangePickerViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AE4ACECA92B54848C70741 /* Pods-CalendarDateRangePickerViewController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CalendarDateRangePickerViewController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CalendarDateRangePickerViewController_Tests/Pods-CalendarDateRangePickerViewController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		EDA0E5C7687F6DABCF2414F9 /* CalendarDateRangePickerViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = CalendarDateRangePickerViewController.podspec; path = ../CalendarDateRangePickerViewController.podspec; sourceTree = "<group>"; };
+		EDA0E5C7687F6DABCF2414F9 /* CalendarDateRangePickerViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CalendarDateRangePickerViewController.podspec; path = ../CalendarDateRangePickerViewController.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,11 +100,14 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				533E870E1F94020A00CA59CA /* ViewController.swift */,
+				53B5F1A61F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift */,
+				53A0E5671F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				53A0E56B1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift */,
 			);
 			name = "Example for CalendarDateRangePickerViewController";
 			path = CalendarDateRangePickerViewController;
@@ -215,6 +224,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 3EKA2B3YUL;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -361,8 +371,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				533E870F1F94020A00CA59CA /* ViewController.swift in Sources */,
+				53B5F1A71F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift in Sources */,
+				53A0E56C1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				53A0E5681F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +467,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -499,6 +513,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -508,13 +523,14 @@
 			baseConfigurationReference = 863F34A79DF14110025EE9E4 /* Pods-CalendarDateRangePickerViewController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3EKA2B3YUL;
 				INFOPLIST_FILE = CalendarDateRangePickerViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -523,13 +539,14 @@
 			baseConfigurationReference = C9304EBA1ACFB048B6759598 /* Pods-CalendarDateRangePickerViewController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3EKA2B3YUL;
 				INFOPLIST_FILE = CalendarDateRangePickerViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -550,7 +567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -567,7 +584,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
