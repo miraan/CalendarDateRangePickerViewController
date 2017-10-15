@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'CalendarDateRangePickerViewController'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of CalendarDateRangePickerViewController.'
+  s.summary          = 'A calendar date range picker view controller in Swift for iOS.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+This is a calendar date range picker view controller written in Swift for iOS. The typical use case is where you want the user to input a date range, i.e. a start date and an end date. This view controller allows this in an intuitive way, and is easy to use by implementing the delegate methods. See the example project for a taste.
                        DESC
 
   s.homepage         = 'https://github.com/miraan/CalendarDateRangePickerViewController'
