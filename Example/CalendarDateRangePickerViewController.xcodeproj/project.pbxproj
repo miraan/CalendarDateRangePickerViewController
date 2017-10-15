@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		533E870F1F94020A00CA59CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E870E1F94020A00CA59CA /* ViewController.swift */; };
-		53A0E5681F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0E5671F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift */; };
-		53A0E56C1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0E56B1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift */; };
-		53B5F1A71F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5F1A61F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -33,9 +30,6 @@
 /* Begin PBXFileReference section */
 		1C3A473AEA8A9FDE924642CC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		533E870E1F94020A00CA59CA /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		53A0E5671F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerHeaderView.swift; sourceTree = "<group>"; };
-		53A0E56B1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerCell.swift; sourceTree = "<group>"; };
-		53B5F1A61F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateRangePickerViewController.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CalendarDateRangePickerViewController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarDateRangePickerViewController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,12 +96,9 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				533E870E1F94020A00CA59CA /* ViewController.swift */,
-				53B5F1A61F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift */,
-				53A0E5671F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
-				53A0E56B1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift */,
 			);
 			name = "Example for CalendarDateRangePickerViewController";
 			path = CalendarDateRangePickerViewController;
@@ -372,10 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				533E870F1F94020A00CA59CA /* ViewController.swift in Sources */,
-				53B5F1A71F9366CD00F71E0A /* CalendarDateRangePickerViewController.swift in Sources */,
-				53A0E56C1F9373EA00DC77A7 /* CalendarDateRangePickerCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				53A0E5681F936F2A00DC77A7 /* CalendarDateRangePickerHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

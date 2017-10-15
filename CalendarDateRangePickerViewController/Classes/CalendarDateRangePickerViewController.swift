@@ -8,30 +8,32 @@
 
 import UIKit
 
-protocol CalendarDateRangePickerViewControllerDelegate {
+public protocol CalendarDateRangePickerViewControllerDelegate {
     func didTapCancel()
     func didTapDoneWithDateRange(startDate: Date!, endDate: Date!)
 }
 
-class CalendarDateRangePickerViewController: UICollectionViewController {
+public class CalendarDateRangePickerViewController: UICollectionViewController {
     
-    private let cellReuseIdentifier = "CalendarDateRangePickerCell"
-    private let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
+    let cellReuseIdentifier = "CalendarDateRangePickerCell"
+    let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
     
-    var delegate: CalendarDateRangePickerViewControllerDelegate!
+    public var delegate: CalendarDateRangePickerViewControllerDelegate!
     
     let itemsPerRow = 7
     let itemHeight: CGFloat = 40
     let collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
     
-    var minimumDate: Date!
-    var maximumDate: Date!
+    public var minimumDate: Date!
+    public var maximumDate: Date!
     
-    var selectedStartDate: Date?
-    var selectedEndDate: Date?
+    public var selectedStartDate: Date?
+    public var selectedEndDate: Date?
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Select Dates"
         
         collectionView?.dataSource = self
         collectionView?.delegate = self
@@ -50,7 +52,7 @@ class CalendarDateRangePickerViewController: UICollectionViewController {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
     }
     
     func didTapCancel() {
@@ -63,27 +65,27 @@ class CalendarDateRangePickerViewController: UICollectionViewController {
         }
         delegate.didTapDoneWithDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
-    // MARK: UICollectionViewDataSource
+}
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension CalendarDateRangePickerViewController {
+    
+    // UICollectionViewDataSource
+    
+    override public func numberOfSections(in collectionView: UICollectionView) -> Int {
         let difference = Calendar.current.dateComponents([.month], from: minimumDate, to: maximumDate)
         return difference.month! + 1
     }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    override public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let firstDateForSection = getFirstDateForSection(section: section)
         let weekdayRowItems = 7
         let blankItems = getWeekday(date: firstDateForSection) - 1
         let daysInMonth = getNumberOfDaysInMonth(date: firstDateForSection)
         return weekdayRowItems + blankItems + daysInMonth
     }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CalendarDateRangePickerCell
         cell.reset()
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
@@ -124,7 +126,7 @@ class CalendarDateRangePickerViewController: UICollectionViewController {
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    override public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CalendarDateRangePickerHeaderView
@@ -135,7 +137,11 @@ class CalendarDateRangePickerViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+}
+
+extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLayout {
+    
+    override public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CalendarDateRangePickerCell
         if cell.date == nil {
             return
@@ -159,12 +165,8 @@ class CalendarDateRangePickerViewController: UICollectionViewController {
         }
         collectionView.reloadData()
     }
-
-}
-
-extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding = collectionViewInsets.left + collectionViewInsets.right
@@ -173,15 +175,15 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.size.width, height: 50)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
@@ -241,4 +243,5 @@ extension CalendarDateRangePickerViewController {
     func isBefore(dateA: Date, dateB: Date) -> Bool {
         return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
     }
+    
 }
