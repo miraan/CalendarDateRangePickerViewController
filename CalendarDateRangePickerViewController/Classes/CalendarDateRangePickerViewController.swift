@@ -133,7 +133,7 @@ extension CalendarDateRangePickerViewController {
             headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section))
             return headerView
         default:
-            assert(false, "Unexpected element kind")
+            fatalError("Unexpected element kind")
         }
     }
     
