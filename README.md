@@ -9,6 +9,10 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+Here's what it looks like:
+
+![alt text](https://github.com/miraan/CalendarDateRangePickerViewController/blob/master/recording.gif "Select start and end dates easily.")
+
 ## Usage
 
 It's as simple as:
