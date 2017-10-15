@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'CalendarDateRangePickerViewController_Example' do
+  pod 'CalendarDateRangePickerViewController', :path => '../'
+
+  target 'CalendarDateRangePickerViewController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
