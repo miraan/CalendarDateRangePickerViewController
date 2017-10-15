@@ -13,7 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 It's as simple as:
 
-```
+```swift
 let dateRangePickerViewController = CalendarDateRangePickerViewController(collectionViewLayout: UICollectionViewFlowLayout())
 dateRangePickerViewController.delegate = self
 let navigationController = UINavigationController(rootViewController: dateRangePickerViewController)
@@ -22,7 +22,7 @@ self.navigationController?.present(navigationController, animated: true, complet
 
 Just implement the delegate methods:
 
-```
+```swift
 protocol CalendarDateRangePickerViewControllerDelegate {
     func didTapCancel()
     func didTapDoneWithDateRange(startDate: Date!, endDate: Date!)
@@ -31,7 +31,7 @@ protocol CalendarDateRangePickerViewControllerDelegate {
 
 You can also set additional options to override the defaults:
 
-```
+```swift
 dateRangePickerViewController.minimumDate = Date()
 dateRangePickerViewController.maximumDate = Calendar.current.date(byAdding: .year, value: 2, to: Date())
 dateRangePickerViewController.selectedStartDate = Date()
