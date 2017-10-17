@@ -40,6 +40,8 @@ dateRangePickerViewController.minimumDate = Date()
 dateRangePickerViewController.maximumDate = Calendar.current.date(byAdding: .year, value: 2, to: Date())
 dateRangePickerViewController.selectedStartDate = Date()
 dateRangePickerViewController.selectedEndDate = Calendar.current.date(byAdding: .day, value: 10, to: Date())
+dateRangePickerViewController.selectedColor = UIColor.red
+dateRangePickerViewController.titleText = "Select Date Range"
 ```
 
 ## Installation

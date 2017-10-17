@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CalendarDateRangePickerViewController: 35b002e08940f4135368ff9657706c17c209d21f
+  CalendarDateRangePickerViewController: 3199c67b45160527ae3864980caad29343366ce0
 
 PODFILE CHECKSUM: 2451ae3089d0abca27169c63b3f8b007c0f69b64
 
