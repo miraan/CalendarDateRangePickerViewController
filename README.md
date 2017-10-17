@@ -28,8 +28,8 @@ Just implement the delegate methods:
 
 ```swift
 protocol CalendarDateRangePickerViewControllerDelegate {
-    func didTapCancel()
-    func didTapDoneWithDateRange(startDate: Date!, endDate: Date!)
+    func didCancelPickingDateRange()
+    func didPickDateRange(startDate: Date!, endDate: Date!)
 }
 ```
 

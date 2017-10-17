@@ -30,11 +30,11 @@ class ViewController: UIViewController {
 
 extension ViewController : CalendarDateRangePickerViewControllerDelegate {
     
-    func didTapCancel() {
+    func didCancelPickingDateRange() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func didTapDoneWithDateRange(startDate: Date!, endDate: Date!) {
+    func didPickDateRange(startDate: Date!, endDate: Date!) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         label.text = dateFormatter.string(from: startDate) + " to " + dateFormatter.string(from: endDate)
