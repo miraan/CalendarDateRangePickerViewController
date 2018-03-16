@@ -11,6 +11,14 @@ import UIKit
 public protocol CalendarDateRangePickerViewControllerDelegate {
     func didCancelPickingDateRange()
     func didPickDateRange(startDate: Date!, endDate: Date!)
+    
+    // Optional
+    func calendarViewDidLayoutSubviews()
+}
+
+extension CalendarDateRangePickerViewControllerDelegate {
+    // Making calendarViewDidLayoutSubviews optional. For backwards compatiblity.
+    func calendarViewDidLayoutSubviews() {}
 }
 
 public class CalendarDateRangePickerViewController: UICollectionViewController {
@@ -35,7 +43,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
     public var titleText = "Select Dates"
-
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +69,11 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
     }
     
+    override public func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        delegate.calendarViewDidLayoutSubviews()
+    }
+    
     func didTapCancel() {
         delegate.didCancelPickingDateRange()
     }
@@ -71,7 +84,6 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         }
         delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
-    
 }
 
 extension CalendarDateRangePickerViewController {
