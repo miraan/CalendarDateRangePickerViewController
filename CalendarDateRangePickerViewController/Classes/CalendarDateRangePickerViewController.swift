@@ -24,6 +24,9 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     let itemHeight: CGFloat = 40
     let collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
     
+    // Allow the user select "backwards" in the calendar? E.g., say I select March 16 first and then want to select March 14 for range of March 14 to March 16. Default is `false` because this was the original behavior of this Cocoapod.
+    public var allowBackwardSelection: Bool = false
+    
     public var minimumDate: Date!
     public var maximumDate: Date!
     
@@ -160,8 +163,14 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
                 selectedEndDate = cell.date
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
             } else {
-                // If a cell before the currently selected start date is selected then just set it as the new start date
-                selectedStartDate = cell.date
+                if allowBackwardSelection {
+                    selectedEndDate = selectedStartDate
+                    selectedStartDate = cell.date
+                }
+                else {
+                    // If a cell before the currently selected start date is selected then just set it as the new start date
+                    selectedStartDate = cell.date
+                }
             }
         } else {
             selectedStartDate = cell.date
