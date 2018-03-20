@@ -13,11 +13,13 @@ public protocol CalendarDateRangePickerViewControllerDelegate {
     func didPickDateRange(startDate: Date!, endDate: Date!)
     
     // Optional
+    func didPickDate(date: Date)
     func calendarViewDidLayoutSubviews()
 }
 
 extension CalendarDateRangePickerViewControllerDelegate {
-    // Making calendarViewDidLayoutSubviews optional. For backwards compatiblity.
+    // Making these optional. For backwards compatiblity.
+    func didPickDate(date: Date) {}
     func calendarViewDidLayoutSubviews() {}
 }
 
@@ -30,10 +32,15 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     let itemsPerRow = 7
     let itemHeight: CGFloat = 40
-    let collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+    
+    // 3/20/18; Changed from `let` to `var`, and made public, to allow Cocoapod user to change insets.
+    public var collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
     
     // Allow the user select "backwards" in the calendar? E.g., say I select March 16 first and then want to select March 14 for range of March 14 to March 16. Default is `false` because this was the original behavior of this Cocoapod.
     public var allowBackwardSelection: Bool = false
+    
+    // If you set this to false, then you get a callback for date selection on every tap. `true` is the original behavior of this Cocoapod.
+    public var requireDone: Bool = true
     
     public var minimumDate: Date!
     public var maximumDate: Date!
@@ -79,9 +86,15 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     }
     
     func didTapDone() {
-        if selectedStartDate == nil || selectedEndDate == nil {
+        if selectedStartDate == nil {
             return
         }
+        
+        if selectedEndDate == nil {
+            delegate.didPickDate(date: selectedStartDate!)
+            return
+        }
+        
         delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
 }
@@ -159,6 +172,11 @@ extension CalendarDateRangePickerViewController {
 }
 
 extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLayout {
+    func didPickDateRangeIfNeeded() {
+        if !requireDone {
+            didTapDone()
+        }
+    }
     
     override public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CalendarDateRangePickerCell
@@ -188,6 +206,9 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
             selectedStartDate = cell.date
             selectedEndDate = nil
         }
+        
+        didPickDateRangeIfNeeded()
+        
         collectionView.reloadData()
     }
     
