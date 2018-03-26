@@ -202,7 +202,7 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
                 selectedEndDate = cell.date
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
             } else {
-                if allowBackwardSelection {
+                if allowBackwardSelection && selectedStartDate != cell.date {
                     selectedEndDate = selectedStartDate
                     selectedStartDate = cell.date
                 }
