@@ -22,7 +22,8 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     let itemsPerRow = 7
     let itemHeight: CGFloat = 40
-    let collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+    var insetsIsCalculated:Bool = false
+    var collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
     
     public var minimumDate: Date!
     public var maximumDate: Date!
@@ -173,10 +174,50 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
     public func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if(!insetsIsCalculated) {
+            calculateCorrectInsets(collectionView: collectionView)
+            insetsIsCalculated = true
+        }
+        
         let padding = collectionViewInsets.left + collectionViewInsets.right
         let availableWidth = view.frame.width - padding
         let itemWidth = availableWidth / CGFloat(itemsPerRow)
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+    private func calculateCorrectInsets(collectionView:UICollectionView) {
+        
+        let iterator:CGFloat = 1
+        let initalPadding = collectionViewInsets.left + collectionViewInsets.right
+        
+        let padding = calculatePadding(collectionViewWidth: view.frame.width, initialPadding: initalPadding, iterator: iterator)
+        let ratio = padding / (collectionViewInsets.left + collectionViewInsets.right)
+        
+        if (ratio == CGFloat.infinity) {
+            collectionViewInsets.left = padding / 2
+            collectionViewInsets.right = padding / 2
+        } else {
+            collectionViewInsets.left *= ratio
+            collectionViewInsets.right *= ratio
+        }
+        
+        collectionView.contentInset = collectionViewInsets
+    }
+    
+    public func calculatePadding(collectionViewWidth:CGFloat, initialPadding:CGFloat, iterator:CGFloat) -> CGFloat {
+        let positive = initialPadding >= 0
+        var availableWidth = collectionViewWidth - (positive ? initialPadding : -initialPadding)
+        while(availableWidth.truncatingRemainder(dividingBy: CGFloat(itemsPerRow)) != 0) {
+            availableWidth += positive ? iterator : -iterator
+        }
+        
+        let padding = view.frame.width - availableWidth
+        if (0 > padding) {
+            return calculatePadding(collectionViewWidth: collectionViewWidth, initialPadding: padding, iterator: iterator)
+        }
+        
+        return padding
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
