@@ -266,7 +266,14 @@ extension CalendarDateRangePickerViewController {
         var components = DateComponents()
         components.calendar = Calendar.current
         components.weekday = weekday
-        let date = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: Calendar.MatchingPolicy.strict)
+        var date:Date? = nil
+        
+        if(isFirstWeekDaySunday()) {
+            date = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: Calendar.MatchingPolicy.strict)
+        } else {
+            date = getWeekdayForMondayAsFistDayOfWeek(weekday:weekday)
+        }
+
         if date == nil {
             return "E"
         }
@@ -276,7 +283,20 @@ extension CalendarDateRangePickerViewController {
     }
     
     func getWeekday(date: Date) -> Int {
-        return Calendar.current.dateComponents([.weekday], from: date).weekday!
+        let weekday = Calendar.current.dateComponents([.weekday], from: date).weekday!
+        
+        if(isFirstWeekDaySunday()) {
+            return weekday
+        }
+        
+        if(weekday == 1) {
+            return 7
+        }
+        if(weekday == 7) {
+            return 0
+        }
+        
+        return weekday - 1
     }
     
     func getNumberOfDaysInMonth(date: Date) -> Int {
@@ -307,4 +327,13 @@ extension CalendarDateRangePickerViewController {
         return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
     }
     
+    func isFirstWeekDaySunday() -> Bool {
+        return Calendar.current.firstWeekday == 1
+    }
+    
+    func getWeekdayForMondayAsFistDayOfWeek(weekday: Int) -> Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) else { return nil }
+        return gregorian.date(byAdding: .day, value: weekday, to: sunday)
+    }
 }
