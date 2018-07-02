@@ -23,6 +23,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     let itemsPerRow = 7
     let itemHeight: CGFloat = 40
     var insetsIsCalculated:Bool = false
+    var didScrollToDate = false
     var collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
     
     public var minimumDate: Date!
@@ -139,6 +140,13 @@ extension CalendarDateRangePickerViewController {
             return headerView
         default:
             fatalError("Unexpected element kind")
+        }
+    }
+    
+    override public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !didScrollToDate {
+            collectionView.scrollToItem(at: getIndexPathForDate(date:selectedStartDate!), at: .centeredVertically, animated: false)
+            didScrollToDate = true
         }
     }
     
@@ -273,6 +281,16 @@ extension CalendarDateRangePickerViewController {
     
     func getNumberOfDaysInMonth(date: Date) -> Int {
         return Calendar.current.range(of: .day, in: .month, for: date)!.count
+    }
+    
+    func getIndexPathForDate(date: Date) -> IndexPath {
+        var sectionMonht = Calendar.current.dateComponents([.month], from: minimumDate, to: date).month!
+        let itemDay = Calendar.current.component(.day, from: date) - 1
+        if(itemDay == 0) {
+            sectionMonht += 1 // Fix 1th day appereace
+        }
+        let indexPath = IndexPath(item:itemDay, section: sectionMonht)
+        return indexPath
     }
     
     func getDate(dayOfMonth: Int, section: Int) -> Date {
