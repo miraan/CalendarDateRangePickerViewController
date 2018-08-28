@@ -15,12 +15,14 @@ public protocol CalendarDateRangePickerViewControllerDelegate {
     // Optional
     func didPickDate(date: Date)
     func calendarViewDidLayoutSubviews()
+    func calendarViewWillLayoutSubviews()
 }
 
-extension CalendarDateRangePickerViewControllerDelegate {
+public extension CalendarDateRangePickerViewControllerDelegate {
     // Making these optional. For backwards compatiblity.
     func didPickDate(date: Date) {}
     func calendarViewDidLayoutSubviews() {}
+    func calendarViewWillLayoutSubviews() {}
 }
 
 public class CalendarDateRangePickerViewController: UICollectionViewController {
@@ -38,6 +40,9 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     // Allow the user select "backwards" in the calendar? E.g., say I select March 16 first and then want to select March 14 for range of March 14 to March 16. Default is `false` because this was the original behavior of this Cocoapod.
     public var allowBackwardSelection: Bool = false
+    
+    // Only allow a single date (not a date range) to be selected. Default behavior is not to allow this.
+    public var onlySingleDateSelection: Bool = false
     
     // If you set this to false, then you get a callback for date selection on every tap. `true` is the original behavior of this Cocoapod.
     public var requireDone: Bool = true
@@ -85,6 +90,11 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         delegate.calendarViewDidLayoutSubviews()
+    }
+    
+    override public func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        delegate.calendarViewWillLayoutSubviews()
     }
     
     func didTapCancel() {
@@ -195,7 +205,7 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
         if isBefore(dateA: cell.date!, dateB: minimumDate) {
             return
         }
-        if selectedStartDate == nil {
+        if selectedStartDate == nil || onlySingleDateSelection {
             selectedStartDate = cell.date
         } else if selectedEndDate == nil {
             if isBefore(dateA: selectedStartDate!, dateB: cell.date!) {
