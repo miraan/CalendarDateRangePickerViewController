@@ -47,6 +47,13 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     // If you set this to false, then you get a callback for date selection on every tap. `true` is the original behavior of this Cocoapod.
     public var requireDone: Bool = true
     
+    fileprivate var calendar:Calendar = Calendar.current
+    public var timezone: TimeZone = TimeZone.current {
+        didSet {
+            calendar.timeZone = timezone
+        }
+    }
+    
     public var minimumDate: Date!
     public var maximumDate: Date!
     
@@ -79,7 +86,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
             minimumDate = Date()
         }
         if maximumDate == nil {
-            maximumDate = Calendar.current.date(byAdding: .year, value: 3, to: minimumDate)
+            maximumDate = calendar.date(byAdding: .year, value: 3, to: minimumDate)
         }
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
@@ -120,7 +127,7 @@ extension CalendarDateRangePickerViewController {
     // UICollectionViewDataSource
     
     override public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let difference = Calendar.current.dateComponents([.month], from: minimumDate, to: maximumDate)
+        let difference = calendar.dateComponents([.month], from: minimumDate, to: maximumDate)
         return difference.month! + 1
     }
     
@@ -259,54 +266,56 @@ extension CalendarDateRangePickerViewController {
     // Helper functions
     
     func getFirstDate() -> Date {
-        var components = Calendar.current.dateComponents([.month, .year], from: minimumDate)
+        var components = calendar.dateComponents([.month, .year], from: minimumDate)
         components.day = 1
-        return Calendar.current.date(from: components)!
+        return calendar.date(from: components)!
     }
     
     func getFirstDateForSection(section: Int) -> Date {
-        return Calendar.current.date(byAdding: .month, value: section, to: getFirstDate())!
+        return calendar.date(byAdding: .month, value: section, to: getFirstDate())!
     }
     
     func getMonthLabel(date: Date) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timezone
         dateFormatter.dateFormat = "MMMM yyyy"
         return dateFormatter.string(from: date)
     }
     
     func getWeekdayLabel(weekday: Int) -> String {
         var components = DateComponents()
-        components.calendar = Calendar.current
+        components.calendar = calendar
         components.weekday = weekday
-        let date = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: Calendar.MatchingPolicy.strict)
+        let date = calendar.nextDate(after: Date(), matching: components, matchingPolicy: Calendar.MatchingPolicy.strict)
         if date == nil {
             return "E"
         }
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timezone
         dateFormatter.dateFormat = "EEEEE"
         return dateFormatter.string(from: date!)
     }
     
     func getWeekday(date: Date) -> Int {
-        return Calendar.current.dateComponents([.weekday], from: date).weekday!
+        return calendar.dateComponents([.weekday], from: date).weekday!
     }
     
     func getNumberOfDaysInMonth(date: Date) -> Int {
-        return Calendar.current.range(of: .day, in: .month, for: date)!.count
+        return calendar.range(of: .day, in: .month, for: date)!.count
     }
     
     func getDate(dayOfMonth: Int, section: Int) -> Date {
-        var components = Calendar.current.dateComponents([.month, .year], from: getFirstDateForSection(section: section))
+        var components = calendar.dateComponents([.month, .year], from: getFirstDateForSection(section: section))
         components.day = dayOfMonth
-        return Calendar.current.date(from: components)!
+        return calendar.date(from: components)!
     }
     
     func areSameDay(dateA: Date, dateB: Date) -> Bool {
-        return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedSame
+        return calendar.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedSame
     }
     
     func isBefore(dateA: Date, dateB: Date) -> Bool {
-        return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
+        return calendar.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
     }
     
 }
