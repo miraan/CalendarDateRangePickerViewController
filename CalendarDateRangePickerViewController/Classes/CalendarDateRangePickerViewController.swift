@@ -11,6 +11,8 @@ import UIKit
 public protocol CalendarDateRangePickerViewControllerDelegate {
     func didCancelPickingDateRange()
     func didPickDateRange(startDate: Date!, endDate: Date!)
+    func didSelectStartDate(startDate: Date!)
+    func didSelectEndDate(endDate: Date!)
 }
 
 public class CalendarDateRangePickerViewController: UICollectionViewController {
@@ -155,16 +157,20 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
         }
         if selectedStartDate == nil {
             selectedStartDate = cell.date
+            delegate.didSelectStartDate(startDate: selectedStartDate)
         } else if selectedEndDate == nil {
             if isBefore(dateA: selectedStartDate!, dateB: cell.date!) {
                 selectedEndDate = cell.date
+                delegate.didSelectEndDate(endDate: selectedEndDate)
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
             } else {
                 // If a cell before the currently selected start date is selected then just set it as the new start date
                 selectedStartDate = cell.date
+                delegate.didSelectStartDate(startDate: selectedStartDate)
             }
         } else {
             selectedStartDate = cell.date
+            delegate.didSelectStartDate(startDate: selectedStartDate)
             selectedEndDate = nil
         }
         collectionView.reloadData()

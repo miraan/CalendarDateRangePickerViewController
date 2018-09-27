@@ -41,4 +41,17 @@ extension ViewController : CalendarDateRangePickerViewControllerDelegate {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    @objc func didSelectStartDate(startDate: Date!){
+//        Do something when start date is selected...
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        print(dateFormatter.string(from: startDate))
+    }
+    
+    @objc func didSelectEndDate(endDate: Date!){
+//        Do something when end date is selected...
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        print(dateFormatter.string(from: endDate))
+    }
 }
