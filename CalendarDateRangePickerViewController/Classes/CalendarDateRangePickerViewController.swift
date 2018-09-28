@@ -31,6 +31,13 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     public var selectedStartDate: Date?
     public var selectedEndDate: Date?
+  
+    public var cellHighlightedColor = UIColor(white: 0.9, alpha: 1.0)
+    public static let defaultCellFontSize:CGFloat = 15.0
+    public static let defaultHeaderFontSize:CGFloat = 17.0
+    public var cellFont:UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
+    public var headerFont:UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
+
     
     public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
     public var titleText = "Select Dates"
@@ -92,7 +99,10 @@ extension CalendarDateRangePickerViewController {
     
     override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CalendarDateRangePickerCell
+        
+        cell.highlightedColor = self.cellHighlightedColor
         cell.selectedColor = self.selectedColor
+        cell.font = self.cellFont
         cell.reset()
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
         if indexPath.item < 7 {
@@ -137,6 +147,7 @@ extension CalendarDateRangePickerViewController {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CalendarDateRangePickerHeaderView
             headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section))
+            headerView.font = headerFont
             return headerView
         default:
             fatalError("Unexpected element kind")
