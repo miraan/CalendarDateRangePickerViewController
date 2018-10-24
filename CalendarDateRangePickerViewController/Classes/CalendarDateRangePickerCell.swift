@@ -18,7 +18,10 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
             label?.font = font
         }
     }
+    
     var selectedColor: UIColor!
+    var selectedLabelColor: UIColor!
+    var highlightedLabelColor: UIColor!
     
     var date: Date?
     var selectedView: UIView?
@@ -73,7 +76,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         self.addSubview(selectedView!)
         self.sendSubview(toBack: selectedView!)
         
-        label.textColor = UIColor.white
+        label.textColor = selectedLabelColor
     }
     
     func highlightRight() {
@@ -84,7 +87,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         halfBackgroundView?.backgroundColor = highlightedColor
         self.addSubview(halfBackgroundView!)
         self.sendSubview(toBack: halfBackgroundView!)
-        
+        label.textColor = highlightedLabelColor
         addRoundHighlightView()
     }
     
@@ -96,7 +99,8 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         halfBackgroundView?.backgroundColor = highlightedColor
         self.addSubview(halfBackgroundView!)
         self.sendSubview(toBack: halfBackgroundView!)
-        
+        label.textColor = highlightedLabelColor
+
         addRoundHighlightView()
     }
     
@@ -112,6 +116,8 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
     
     func highlight() {
         self.backgroundColor = highlightedColor
+        label.textColor = highlightedLabelColor
+
     }
     
     func disable() {

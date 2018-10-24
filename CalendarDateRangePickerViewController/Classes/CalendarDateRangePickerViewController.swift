@@ -40,6 +40,8 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
 
     
     public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
+    public var selectedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
+    public var highlightedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     public var titleText = "Select Dates"
 
     override public func viewDidLoad() {
@@ -102,6 +104,8 @@ extension CalendarDateRangePickerViewController {
         
         cell.highlightedColor = self.cellHighlightedColor
         cell.selectedColor = self.selectedColor
+        cell.selectedLabelColor = self.selectedLabelColor
+        cell.highlightedLabelColor = self.highlightedLabelColor
         cell.font = self.cellFont
         cell.reset()
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
