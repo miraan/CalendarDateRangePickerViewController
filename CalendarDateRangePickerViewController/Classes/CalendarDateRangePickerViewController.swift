@@ -17,36 +17,36 @@ public protocol CalendarDateRangePickerViewControllerDelegate {
 
 public class CalendarDateRangePickerViewController: UICollectionViewController {
     
-    let cellReuseIdentifier = "CalendarDateRangePickerCell"
-    let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
+    @objc let cellReuseIdentifier = "CalendarDateRangePickerCell"
+    @objc let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
     
     public var delegate: CalendarDateRangePickerViewControllerDelegate!
     
-    let itemsPerRow = 7
-    let itemHeight: CGFloat = 40
-    let collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+    @objc let itemsPerRow = 7
+    @objc let itemHeight: CGFloat = 40
+    @objc let collectionViewInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
     
-    public var minimumDate: Date!
-    public var maximumDate: Date!
+    @objc public var minimumDate: Date!
+    @objc public var maximumDate: Date!
     
-    public var selectedStartDate: Date?
-    public var selectedEndDate: Date?
-    var selectedStartCell: IndexPath?
-    var selectedEndCell: IndexPath?
+    @objc public var selectedStartDate: Date?
+    @objc public var selectedEndDate: Date?
+    @objc var selectedStartCell: IndexPath?
+    @objc var selectedEndCell: IndexPath?
     
-    public var disabledDates: [Date]?
+    @objc public var disabledDates: [Date]?
     
-    public var cellHighlightedColor = UIColor(white: 0.9, alpha: 1.0)
-    public static let defaultCellFontSize:CGFloat = 15.0
-    public static let defaultHeaderFontSize:CGFloat = 17.0
-    public var cellFont:UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
-    public var headerFont:UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
+    @objc public var cellHighlightedColor = UIColor(white: 0.9, alpha: 1.0)
+    @objc public static let defaultCellFontSize:CGFloat = 15.0
+    @objc public static let defaultHeaderFontSize:CGFloat = 17.0
+    @objc public var cellFont:UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
+    @objc public var headerFont:UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
 
     
-    public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
-    public var selectedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
-    public var highlightedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
-    public var titleText = "Select Dates"
+    @objc public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
+    @objc public var selectedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
+    @objc public var highlightedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
+    @objc public var titleText = "Select Dates"
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -73,11 +73,11 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
     }
     
-    func didTapCancel() {
+    @objc func didTapCancel() {
         delegate.didCancelPickingDateRange()
     }
     
-    func didTapDone() {
+    @objc func didTapDone() {
         if selectedStartDate == nil || selectedEndDate == nil {
             return
         }
@@ -242,23 +242,23 @@ extension CalendarDateRangePickerViewController {
     
     // Helper functions
     
-    func getFirstDate() -> Date {
+    @objc func getFirstDate() -> Date {
         var components = Calendar.current.dateComponents([.month, .year], from: minimumDate)
         components.day = 1
         return Calendar.current.date(from: components)!
     }
     
-    func getFirstDateForSection(section: Int) -> Date {
+    @objc func getFirstDateForSection(section: Int) -> Date {
         return Calendar.current.date(byAdding: .month, value: section, to: getFirstDate())!
     }
     
-    func getMonthLabel(date: Date) -> String {
+    @objc func getMonthLabel(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
         return dateFormatter.string(from: date)
     }
     
-    func getWeekdayLabel(weekday: Int) -> String {
+    @objc func getWeekdayLabel(weekday: Int) -> String {
         var components = DateComponents()
         components.calendar = Calendar.current
         components.weekday = weekday
@@ -271,29 +271,29 @@ extension CalendarDateRangePickerViewController {
         return dateFormatter.string(from: date!)
     }
     
-    func getWeekday(date: Date) -> Int {
+    @objc func getWeekday(date: Date) -> Int {
         return Calendar.current.dateComponents([.weekday], from: date).weekday!
     }
     
-    func getNumberOfDaysInMonth(date: Date) -> Int {
+    @objc func getNumberOfDaysInMonth(date: Date) -> Int {
         return Calendar.current.range(of: .day, in: .month, for: date)!.count
     }
     
-    func getDate(dayOfMonth: Int, section: Int) -> Date {
+    @objc func getDate(dayOfMonth: Int, section: Int) -> Date {
         var components = Calendar.current.dateComponents([.month, .year], from: getFirstDateForSection(section: section))
         components.day = dayOfMonth
         return Calendar.current.date(from: components)!
     }
     
-    func areSameDay(dateA: Date, dateB: Date) -> Bool {
+    @objc func areSameDay(dateA: Date, dateB: Date) -> Bool {
         return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedSame
     }
     
-    func isBefore(dateA: Date, dateB: Date) -> Bool {
+    @objc func isBefore(dateA: Date, dateB: Date) -> Bool {
         return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
     }
     
-    func isBetween(_ startDateCellIndex: IndexPath, and endDateCellIndex: IndexPath) -> Bool {
+    @objc func isBetween(_ startDateCellIndex: IndexPath, and endDateCellIndex: IndexPath) -> Bool {
         
         if disabledDates == nil{
             return false
