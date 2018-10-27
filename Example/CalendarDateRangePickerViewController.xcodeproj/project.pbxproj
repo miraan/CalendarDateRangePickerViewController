@@ -215,7 +215,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 3EKA2B3YUL;
+						DevelopmentTeam = 3PFT3Q8CHG;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -511,14 +511,14 @@
 			baseConfigurationReference = 863F34A79DF14110025EE9E4 /* Pods-CalendarDateRangePickerViewController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3EKA2B3YUL;
+				DEVELOPMENT_TEAM = 3PFT3Q8CHG;
 				INFOPLIST_FILE = CalendarDateRangePickerViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Example-Ljuka";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -527,14 +527,14 @@
 			baseConfigurationReference = C9304EBA1ACFB048B6759598 /* Pods-CalendarDateRangePickerViewController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3EKA2B3YUL;
+				DEVELOPMENT_TEAM = 3PFT3Q8CHG;
 				INFOPLIST_FILE = CalendarDateRangePickerViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.miraan.CalendarDateRangePickerViewController-Example-Ljuka";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
