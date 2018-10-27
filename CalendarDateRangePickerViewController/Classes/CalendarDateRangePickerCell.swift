@@ -22,7 +22,8 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
     var selectedColor: UIColor!
     var selectedLabelColor: UIColor!
     var highlightedLabelColor: UIColor!
-    
+    var disabledDates: [Date]!
+    var disabledTimestampDates: [Int]?
     var date: Date?
     var selectedView: UIView?
     var halfBackgroundView: UIView?
@@ -122,6 +123,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
     
     func disable() {
         label.textColor = disabledColor
+        
     }
     
 }

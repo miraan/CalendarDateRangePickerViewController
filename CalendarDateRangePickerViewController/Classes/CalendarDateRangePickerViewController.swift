@@ -31,7 +31,11 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     public var selectedStartDate: Date?
     public var selectedEndDate: Date?
-  
+    var selectedStartCell: IndexPath?
+    var selectedEndCell: IndexPath?
+    
+    public var disabledDates: [Date]?
+    
     public var cellHighlightedColor = UIColor(white: 0.9, alpha: 1.0)
     public static let defaultCellFontSize:CGFloat = 15.0
     public static let defaultHeaderFontSize:CGFloat = 17.0
@@ -118,7 +122,17 @@ extension CalendarDateRangePickerViewController {
             let date = getDate(dayOfMonth: dayOfMonth, section: indexPath.section)
             cell.date = date
             cell.label.text = "\(dayOfMonth)"
-            
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let datePreFormatted = dateFormatter.string(from: date)
+            let dateFormatted = dateFormatter.date(from: datePreFormatted)
+         
+            if disabledDates != nil{
+                if (disabledDates?.contains(cell.date!))!{
+                    cell.disable()
+                }
+            }
             if isBefore(dateA: date, dateB: minimumDate) {
                 cell.disable()
             }
@@ -167,24 +181,34 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
         if cell.date == nil {
             return
         }
-        if isBefore(dateA: cell.date!, dateB: minimumDate) {
+        if isBefore(dateA: cell.date!, dateB: minimumDate){
             return
         }
+        
+        if disabledDates != nil{
+            if (disabledDates?.contains(cell.date!))!{
+                return
+            }
+        }
+        
         if selectedStartDate == nil {
             selectedStartDate = cell.date
+            selectedStartCell = indexPath
             delegate.didSelectStartDate(startDate: selectedStartDate)
         } else if selectedEndDate == nil {
-            if isBefore(dateA: selectedStartDate!, dateB: cell.date!) {
+            if isBefore(dateA: selectedStartDate!, dateB: cell.date!) && !isBetween(selectedStartCell!, and: indexPath){
                 selectedEndDate = cell.date
                 delegate.didSelectEndDate(endDate: selectedEndDate)
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
             } else {
                 // If a cell before the currently selected start date is selected then just set it as the new start date
                 selectedStartDate = cell.date
+                selectedStartCell = indexPath
                 delegate.didSelectStartDate(startDate: selectedStartDate)
             }
         } else {
             selectedStartDate = cell.date
+            selectedStartCell = indexPath
             delegate.didSelectStartDate(startDate: selectedStartDate)
             selectedEndDate = nil
         }
@@ -267,6 +291,37 @@ extension CalendarDateRangePickerViewController {
     
     func isBefore(dateA: Date, dateB: Date) -> Bool {
         return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
+    }
+    
+    func isBetween(_ startDateCellIndex: IndexPath, and endDateCellIndex: IndexPath) -> Bool {
+        
+        if disabledDates == nil{
+            return false
+        }
+        
+        var index = startDateCellIndex.row
+        var section = startDateCellIndex.section
+        var currentIndexPath: IndexPath
+        var cell: CalendarDateRangePickerCell?
+
+        while !(index == endDateCellIndex.row && section == endDateCellIndex.section){
+            currentIndexPath = IndexPath(row: index, section: section)
+            cell = collectionView?.cellForItem(at: currentIndexPath) as! CalendarDateRangePickerCell
+            if cell == nil{
+                section = section + 1
+                let blankItems = getWeekday(date: getFirstDateForSection(section: section)) - 1
+                index = blankItems + 1
+                currentIndexPath = IndexPath(row: index, section: section)
+                cell = collectionView?.cellForItem(at: currentIndexPath) as! CalendarDateRangePickerCell
+            }
+            
+            if (disabledDates?.contains((cell?.date)!))!{
+                return true
+            }
+            index = index + 1
+        }
+        
+        return false
     }
     
 }

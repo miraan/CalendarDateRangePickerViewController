@@ -19,6 +19,14 @@ class ViewController: UIViewController {
         dateRangePickerViewController.minimumDate = Date()
         dateRangePickerViewController.maximumDate = Calendar.current.date(byAdding: .year, value: 2, to: Date())
         dateRangePickerViewController.selectedStartDate = Date()
+/*
+         Set disabled dates if you want. It's optional...
+         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        dateRangePickerViewController.disabledDates = [dateFormatter.date(from: "2018-11-13"), dateFormatter.date(from: "2018-11-21")] as? [Date]
+*/
         dateRangePickerViewController.selectedEndDate = Calendar.current.date(byAdding: .day, value: 10, to: Date())
         dateRangePickerViewController.selectedColor = UIColor.red
         dateRangePickerViewController.titleText = "Select Date Range"
