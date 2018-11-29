@@ -39,4 +39,6 @@ This is a calendar date range picker view controller written in Swift for iOS. T
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+
+  s.swift_version = '4.2'
 end
