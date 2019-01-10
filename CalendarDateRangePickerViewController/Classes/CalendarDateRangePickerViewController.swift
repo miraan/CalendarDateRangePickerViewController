@@ -9,8 +9,10 @@
 import UIKit
 
 public protocol CalendarDateRangePickerViewControllerDelegate {
-    func didCancelPickingDateRange()
-    func didPickDateRange(startDate: Date!, endDate: Date!)
+    func didTapCancel()
+    func didTapDoneWithDateRange(startDate: Date!, endDate: Date!)
+    
+    func didTapDoneWithSignleDateRange(startDate: Date!)
 }
 
 public class CalendarDateRangePickerViewController: UICollectionViewController {
@@ -29,14 +31,11 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     public var selectedStartDate: Date?
     public var selectedEndDate: Date?
-    
-    public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
-    public var titleText = "Select Dates"
 
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = self.titleText
+        self.title = "Select Dates"
         
         collectionView?.dataSource = self
         collectionView?.delegate = self
@@ -44,6 +43,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
 
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+    
         collectionView?.contentInset = collectionViewInsets
         
         if minimumDate == nil {
@@ -54,20 +54,30 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         }
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
-        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
+        
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Single", style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDoneSignle))
+        
+//        self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
     }
     
-    func didTapCancel() {
-        delegate.didCancelPickingDateRange()
+    @objc func didTapCancel() {
+        delegate.didTapCancel()
     }
     
-    func didTapDone() {
+    @objc func didTapDone() {
         if selectedStartDate == nil || selectedEndDate == nil {
+            delegate.didTapDoneWithSignleDateRange(startDate: selectedStartDate!)
+        }
+        
+        if selectedStartDate == nil || selectedEndDate == nil {
+            
             return
         }
-        delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
+        delegate.didTapDoneWithDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
+
     
 }
 
@@ -90,7 +100,6 @@ extension CalendarDateRangePickerViewController {
     
     override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CalendarDateRangePickerCell
-        cell.selectedColor = self.selectedColor
         cell.reset()
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
         if indexPath.item < 7 {
@@ -175,7 +184,7 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding = collectionViewInsets.left + collectionViewInsets.right
         let availableWidth = view.frame.width - padding
-        let itemWidth = availableWidth / CGFloat(itemsPerRow)
+        let itemWidth = round(availableWidth / CGFloat(itemsPerRow))
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
