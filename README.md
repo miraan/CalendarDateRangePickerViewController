@@ -38,6 +38,7 @@ You can also set additional options to override the defaults:
 ```swift
 dateRangePickerViewController.minimumDate = Date()
 dateRangePickerViewController.maximumDate = Calendar.current.date(byAdding: .year, value: 2, to: Date())
+dateRangePickerViewController.maximumIntervalBetweenDate = 7
 dateRangePickerViewController.selectedStartDate = Date()
 dateRangePickerViewController.selectedEndDate = Calendar.current.date(byAdding: .day, value: 10, to: Date())
 dateRangePickerViewController.selectedColor = UIColor.red

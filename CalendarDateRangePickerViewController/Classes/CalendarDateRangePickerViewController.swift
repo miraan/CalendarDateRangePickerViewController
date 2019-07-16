@@ -26,6 +26,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     public var minimumDate: Date!
     public var maximumDate: Date!
+    public var maximumIntervalBetweenDate: Int!
     
     public var selectedStartDate: Date?
     public var selectedEndDate: Date?
@@ -43,7 +44,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         collectionView?.backgroundColor = UIColor.white
 
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.contentInset = collectionViewInsets
         
         if minimumDate == nil {
@@ -53,16 +54,20 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
             maximumDate = Calendar.current.date(byAdding: .year, value: 3, to: minimumDate)
         }
         
+        if maximumIntervalBetweenDate == nil {
+            maximumIntervalBetweenDate = 36500 // 100 years
+        }
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
     }
     
-    func didTapCancel() {
+    @objc func didTapCancel() {
         delegate.didCancelPickingDateRange()
     }
     
-    func didTapDone() {
+    @objc func didTapDone() {
         if selectedStartDate == nil || selectedEndDate == nil {
             return
         }
@@ -132,7 +137,7 @@ extension CalendarDateRangePickerViewController {
     
     override public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CalendarDateRangePickerHeaderView
             headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section))
             return headerView
@@ -156,7 +161,8 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
         if selectedStartDate == nil {
             selectedStartDate = cell.date
         } else if selectedEndDate == nil {
-            if isBefore(dateA: selectedStartDate!, dateB: cell.date!) {
+            if isBefore(dateA: selectedStartDate!, dateB: cell.date!)
+                && !isOverMaximumDays(dateA: selectedStartDate!, dateB: cell.date!, maxDays: self.maximumIntervalBetweenDate){
                 selectedEndDate = cell.date
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
             } else {
@@ -246,6 +252,15 @@ extension CalendarDateRangePickerViewController {
     
     func isBefore(dateA: Date, dateB: Date) -> Bool {
         return Calendar.current.compare(dateA, to: dateB, toGranularity: .day) == ComparisonResult.orderedAscending
+    }
+    
+    func isOverMaximumDays(dateA: Date, dateB: Date, maxDays: Int) -> Bool {
+        let diffInDays = Calendar.current.dateComponents([.day], from: dateA, to: dateB).day
+        
+        if let unwDiffDays = diffInDays {
+            return unwDiffDays > maxDays
+        }
+        return false
     }
     
 }
