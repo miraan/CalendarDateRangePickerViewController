@@ -32,6 +32,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     
     public var selectedColor = UIColor(red: 56/255.0, green: 58/255.0, blue: 101/255.0, alpha: 1)
     public var textFont = UIFont.systemFont(ofSize: 14)
+    public var weekLabelColor = UIColor(red: 56/255.0, green: 58/255.0, blue: 101/255.0, alpha: 1)
     
     public var headerTextFont = UIFont.systemFont(ofSize: 14)
     public var headerTextColor = UIColor.black
@@ -70,10 +71,10 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([
                                                                         NSAttributedString.Key.font: barbuttonFont,
-                                                                        NSAttributedString.Key.foregroundColor: barbuttonColor], for: .normal)
+                                                                        NSAttributedString.Key.foregroundColor: barbuttonColor], for: [.normal, .selected, .disabled])
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
                                                                         NSAttributedString.Key.font: barbuttonFont,
-                                                                        NSAttributedString.Key.foregroundColor: barbuttonColor], for: .normal)
+                                                                        NSAttributedString.Key.foregroundColor: barbuttonColor], for: [.normal, .selected, .disabled])
     }
     
     @objc func didTapCancel() {
@@ -114,6 +115,7 @@ extension CalendarDateRangePickerViewController {
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
         if indexPath.item < 7 {
             cell.label.text = getWeekdayLabel(weekday: indexPath.item + 1)
+            cell.label.textColor = self.weekLabelColor
         } else if indexPath.item < 7 + blankItems {
             cell.label.text = ""
         } else {
@@ -153,7 +155,7 @@ extension CalendarDateRangePickerViewController {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CalendarDateRangePickerHeaderView
-            headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section))
+            headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section)).uppercased()
             headerView.label.textColor = headerTextColor
             headerView.label.font = headerTextFont
             return headerView

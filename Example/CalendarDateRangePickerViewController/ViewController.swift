@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         dateRangePickerViewController.selectedColor = UIColor.purple
         dateRangePickerViewController.navTitleColor = .green
         dateRangePickerViewController.barbuttonColor = .red
+        dateRangePickerViewController.weekLabelColor = .yellow
         dateRangePickerViewController.titleText = "Select Date Range"
         let navigationController = UINavigationController(rootViewController: dateRangePickerViewController)
         self.navigationController?.present(navigationController, animated: true, completion: nil)
