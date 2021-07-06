@@ -31,8 +31,18 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     public var selectedEndDate: Date?
     
     public var selectedColor = UIColor(red: 56/255.0, green: 58/255.0, blue: 101/255.0, alpha: 1)
+    public var textFont = UIFont.systemFont(ofSize: 14)
+    
+    public var headerTextFont = UIFont.systemFont(ofSize: 14)
+    public var headerTextColor = UIColor.black
+    
     public var titleText = "Select Dates"
-
+    public var navTitleColor = UIColor.black
+    public var navTitleFont = UIFont.systemFont(ofSize: 15)
+    
+    public var barbuttonColor = UIColor.blue
+    public var barbuttonFont = UIFont.systemFont(ofSize: 13)
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +51,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.backgroundColor = UIColor.white
-
+        
         collectionView?.register(CalendarDateRangePickerCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView?.register(CalendarDateRangePickerHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.contentInset = collectionViewInsets
@@ -53,9 +63,17 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
             maximumDate = Calendar.current.date(byAdding: .year, value: 3, to: minimumDate)
         }
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: navTitleColor, NSAttributedString.Key.font: navTitleFont]
+    
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([
+                                                                        NSAttributedString.Key.font: barbuttonFont,
+                                                                        NSAttributedString.Key.foregroundColor: barbuttonColor], for: .normal)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+                                                                        NSAttributedString.Key.font: barbuttonFont,
+                                                                        NSAttributedString.Key.foregroundColor: barbuttonColor], for: .normal)
     }
     
     @objc func didTapCancel() {
@@ -91,6 +109,7 @@ extension CalendarDateRangePickerViewController {
     override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CalendarDateRangePickerCell
         cell.selectedColor = self.selectedColor
+        cell.label.font = self.textFont
         cell.reset()
         let blankItems = getWeekday(date: getFirstDateForSection(section: indexPath.section)) - 1
         if indexPath.item < 7 {
@@ -135,6 +154,8 @@ extension CalendarDateRangePickerViewController {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! CalendarDateRangePickerHeaderView
             headerView.label.text = getMonthLabel(date: getFirstDateForSection(section: indexPath.section))
+            headerView.label.textColor = headerTextColor
+            headerView.label.font = headerTextFont
             return headerView
         default:
             fatalError("Unexpected element kind")
@@ -171,8 +192,8 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
     }
     
     public func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding = collectionViewInsets.left + collectionViewInsets.right
         let availableWidth = view.frame.width - padding
         let itemWidth = availableWidth / CGFloat(itemsPerRow)
