@@ -9,9 +9,8 @@
 import UIKit
 
 class CalendarDateRangePickerCell: UICollectionViewCell {
-    
-    private let defaultTextColor = UIColor.darkGray
-    private let highlightedColor = UIColor(white: 0.9, alpha: 1.0)
+    private let defaultTextColor = UIColor(red: 56/255.0, green: 58/255.0, blue: 101/255.0, alpha: 1)
+    private let highlightedColor = UIColor(red: 233/255.0, green: 233/255.0, blue: 248/255.0, alpha: 1)
     private let disabledColor = UIColor.lightGray
     
     var selectedColor: UIColor!
@@ -67,7 +66,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         selectedView?.backgroundColor = selectedColor
         selectedView?.layer.cornerRadius = height / 2
         self.addSubview(selectedView!)
-        self.sendSubview(toBack: selectedView!)
+        self.sendSubviewToBack(selectedView!)
         
         label.textColor = UIColor.white
     }
@@ -79,7 +78,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         halfBackgroundView = UIView(frame: CGRect(x: width / 2, y: 0, width: width / 2, height: height))
         halfBackgroundView?.backgroundColor = highlightedColor
         self.addSubview(halfBackgroundView!)
-        self.sendSubview(toBack: halfBackgroundView!)
+        self.sendSubviewToBack(halfBackgroundView!)
         
         addRoundHighlightView()
     }
@@ -91,7 +90,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         halfBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: width / 2, height: height))
         halfBackgroundView?.backgroundColor = highlightedColor
         self.addSubview(halfBackgroundView!)
-        self.sendSubview(toBack: halfBackgroundView!)
+        self.sendSubviewToBack(halfBackgroundView!)
         
         addRoundHighlightView()
     }
@@ -103,7 +102,7 @@ class CalendarDateRangePickerCell: UICollectionViewCell {
         roundHighlightView?.backgroundColor = highlightedColor
         roundHighlightView?.layer.cornerRadius = height / 2
         self.addSubview(roundHighlightView!)
-        self.sendSubview(toBack: roundHighlightView!)
+        self.sendSubviewToBack(roundHighlightView!)
     }
     
     func highlight() {
